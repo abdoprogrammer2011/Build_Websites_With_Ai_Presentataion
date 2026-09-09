@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ChevronUp, ChevronDown, Grid, Play, Pause, Maximize2 } from 'lucide-react'
+import { ChevronUp, ChevronDown, Grid, Play, Pause, Maximize2, Moon, Sun } from 'lucide-react'
 
 export default function NavigationControls({
   currentSlide,
@@ -10,6 +10,8 @@ export default function NavigationControls({
   onToggleDrawer,
   isPlaying,
   onToggleAutoPlay,
+  isLightTheme,
+  onToggleTheme,
 }) {
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -88,6 +90,20 @@ export default function NavigationControls({
         title="ملء الشاشة"
       >
         <Maximize2 className="w-4 h-4" aria-hidden="true" />
+      </button>
+
+      <button
+        type="button"
+        onClick={onToggleTheme}
+        className="p-3 rounded-full bg-white/5 hover:bg-amber-400/20 text-slate-300 transition-all min-h-11 min-w-11 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+        aria-label={isLightTheme ? 'تفعيل الوضع الداكن' : 'تفعيل الوضع الفاتح'}
+        title={isLightTheme ? 'تفعيل الوضع الداكن' : 'تفعيل الوضع الفاتح'}
+      >
+        {isLightTheme ? (
+          <Moon className="w-4 h-4" aria-hidden="true" />
+        ) : (
+          <Sun className="w-4 h-4" aria-hidden="true" />
+        )}
       </button>
     </nav>
   )

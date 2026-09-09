@@ -9,6 +9,21 @@ export default function App() {
   const [currentSlide, setCurrentSlide] = useState(1)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isLightTheme, setIsLightTheme] = useState(() => {
+    try {
+      return localStorage.getItem('presentation-theme') === 'light'
+    } catch {
+      return false
+    }
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('presentation-theme', isLightTheme ? 'light' : 'dark')
+    } catch {
+      // Theme preference is optional when storage is unavailable.
+    }
+  }, [isLightTheme])
 
   const scrollToSlide = useCallback((slideId) => {
     const targetElement = document.getElementById(`slide-${slideId}`)
@@ -73,7 +88,7 @@ export default function App() {
   const progress = (currentSlide / slidesData.length) * 100
 
   return (
-    <div className="relative bg-[#030612] min-h-screen text-slate-100 font-cairo">
+    <div className={`presentation-shell relative bg-[#030612] min-h-screen text-slate-100 font-cairo ${isLightTheme ? 'theme-light' : ''}`}>
       <a
         href="#slide-1"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-[60] focus:bg-cyan-500 focus:text-black focus:px-4 focus:py-2 focus:rounded-lg"
@@ -118,6 +133,8 @@ export default function App() {
         onToggleDrawer={() => setIsDrawerOpen(true)}
         isPlaying={isPlaying}
         onToggleAutoPlay={() => setIsPlaying((p) => !p)}
+        isLightTheme={isLightTheme}
+        onToggleTheme={() => setIsLightTheme((theme) => !theme)}
       />
 
       <SlideDrawer
