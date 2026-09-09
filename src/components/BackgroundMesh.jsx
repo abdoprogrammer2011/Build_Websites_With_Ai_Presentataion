@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function BackgroundMesh() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#030612]">
+    <div className="presentation-background fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#030612]">
       <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-500/15 blur-[140px] animate-mesh-glow motion-reduce:animate-none" />
       <div
         className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-purple-600/20 blur-[160px] animate-mesh-glow motion-reduce:animate-none"
@@ -21,7 +21,7 @@ export default function BackgroundMesh() {
         }}
       />
       <div
-        className="absolute inset-0"
+        className="presentation-vignette absolute inset-0"
         style={{ background: 'radial-gradient(circle at center, transparent 0%, #030612 90%)' }}
       />
     </div>
